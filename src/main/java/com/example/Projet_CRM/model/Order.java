@@ -1,6 +1,5 @@
-package com.example.Projet_CRM.metier;
+package com.example.Projet_CRM.model;
 
-import com.example.Projet_CRM.service.OrderState;
 import jakarta.persistence.*;
 @Entity
 @Table(name="orders")
@@ -12,11 +11,12 @@ public class Order {
         private String typePresta;
         private String designation;
         @ManyToOne
-        @Column(name="client_id")
-        private Integer clientId;
+        @JoinColumn(name="client_id")
+        private Client client;
         @Column(name="nb_days")
         private Integer nbDays;
-        private Double Price;
+        @Column(name="unit_price")
+        private Double unitPrice;
         @Column(name="total_exclude_taxe")
         private Double totalExcludeTaxe;
         @Column(name="total_with_taxe")
@@ -49,12 +49,12 @@ public class Order {
         this.designation = designation;
     }
 
-    public Integer getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(Integer clientId) {
-        this.clientId = clientId;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Integer getNbDays() {
@@ -65,12 +65,12 @@ public class Order {
         this.nbDays = nbDays;
     }
 
-    public Double getPrice() {
-        return Price;
+    public Double getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(Double price) {
-        Price = price;
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public Double getTotalExcludeTaxe() {
@@ -103,9 +103,9 @@ public class Order {
                 "id=" + id +
                 ", typePresta='" + typePresta + '\'' +
                 ", designation='" + designation + '\'' +
-                ", clientId=" + clientId +
+                ", client=" + client +
                 ", nbDays=" + nbDays +
-                ", Price=" + Price +
+                ", UnitPrice=" + unitPrice +
                 ", totalExcludeTaxe=" + totalExcludeTaxe +
                 ", totalWithTaxe=" + totalWithTaxe +
                 ", orderstate=" + orderstate +

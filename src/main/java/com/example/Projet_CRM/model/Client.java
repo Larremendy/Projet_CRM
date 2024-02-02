@@ -1,6 +1,5 @@
-package com.example.Projet_CRM.metier;
+package com.example.Projet_CRM.model;
 
-import com.example.Projet_CRM.service.ClientState;
 import jakarta.persistence.*;
 
 @Entity
