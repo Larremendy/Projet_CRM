@@ -1,2 +1,6 @@
-package com.example.Projet_CRM.service;public enum orderState {
+package com.example.Projet_CRM.service;
+
+public enum OrderState {
+    CANCELED, OPTION, CONFIRMED
+
 }
