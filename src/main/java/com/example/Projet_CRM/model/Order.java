@@ -18,8 +18,12 @@ public class Order {
         @Column(name="unit_price")
         private Double unitPrice;
         @Column(name="total_exclude_taxe")
+        @Transient
+        // ignore persistence ET récupération de la valeur dans la BDD
+        // calcul nécessaire et affectation à l'objet java
         private Double totalExcludeTaxe;
         @Column(name="total_with_taxe")
+        @Transient
         private Double totalWithTaxe;
         @Column(name="state")
         private OrderState orderstate; //(0,1,2) (CANCELED, OPTION, CONFIRMED)
@@ -74,19 +78,12 @@ public class Order {
     }
 
     public Double getTotalExcludeTaxe() {
-        return totalExcludeTaxe;
+        return (getUnitPrice()*getNbDays());
     }
-
-    public void setTotalExcludeTaxe(Double totalExcludeTaxe) {
-        this.totalExcludeTaxe = totalExcludeTaxe;
-    }
+    // Check dans l'API si le setter est utile???
 
     public Double getTotalWithTaxe() {
-        return totalWithTaxe;
-    }
-
-    public void setTotalWithTaxe(Double totalWithTaxe) {
-        this.totalWithTaxe = totalWithTaxe;
+        return (getTotalExcludeTaxe()*1.2);
     }
 
     public OrderState getOrderstate() {
