@@ -28,8 +28,15 @@ public class OrderService {
     public void deleteById(Integer id){
         orderRepository.deleteById(id);
     }
-    public void update(Integer id, Order newOrder){
-        orderRepository.save(newOrder);
+    public void update(Order orderToUpdate, Order newOrder){
+        orderToUpdate.setTypePresta(newOrder.getTypePresta());
+        orderToUpdate.setDesignation(newOrder.getDesignation());
+        orderToUpdate.setClient(newOrder.getClient());
+        orderToUpdate.setNbDays(newOrder.getNbDays());
+        orderToUpdate.setUnitPrice(newOrder.getUnitPrice());
+        orderToUpdate.setOrderstate(newOrder.getOrderstate());
+
+        orderRepository.save(orderToUpdate);
 
 
     }

@@ -28,7 +28,7 @@ public class OrderController {
     // GET order/1
     @GetMapping("orders/{id}")
     public ResponseEntity<?> getOneById(@PathVariable("id") Integer id) {
-        Optional optional = orderService.getOne(id);
+        Optional<Order> optional = orderService.getOne(id);
 
         if (optional.isEmpty())
             return ResponseEntity.badRequest().body("Id non existant");
@@ -44,7 +44,6 @@ public class OrderController {
         if (order == null)
             return ResponseEntity.badRequest().body("Commande à saisir!");
 
-
         if (order.getClient() == null)
             // Ajouter des tests - order.getDesignation().isBlank() || order.getNbDays()==null...
             return ResponseEntity.badRequest().body("Client à saisir!");
@@ -52,12 +51,17 @@ public class OrderController {
         orderService.add(order);
         return ResponseEntity.ok(order);
     }
+
+
+
     // DELETE order/1
     @DeleteMapping("orders/{id}")
     public void deleteById(@PathVariable("id") Integer id){
         orderService.deleteById(id);
     }
 
+
+    // PUT order/1
     @PutMapping("orders/{id}")
     public void put(@PathVariable("id") Integer id, @RequestBody Order newOrder){
         Optional<Order> oldOrder = orderService.getOne(id);
@@ -70,10 +74,10 @@ public class OrderController {
 
 
 
-    // PUT order/1
 
 
-    // DELETE order/1
+
+
 
 
 

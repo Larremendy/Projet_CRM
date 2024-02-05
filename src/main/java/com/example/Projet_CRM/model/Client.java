@@ -116,16 +116,16 @@ public class Client {
     public String toString() {
         return "Clients{" +
                 "id=" + id +
-                ", companyName='" + companyName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", companie='" + companyName + '\'' +
+                ", Prenom='" + firstName + '\'' +
+                ", Nom='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", city='" + city + '\'' +
-                ", country='" + country + '\'' +
-                ", clientState=" + clientState +
+                ", Telephone='" + phone + '\'' +
+                ", adresse='" + address + '\'' +
+                ", Code Postal='" + zipCode + '\'' +
+                ", Ville='" + city + '\'' +
+                ", Pays='" + country + '\'' +
+                ", Statut du client=" + clientState +
                 '}';
     }
 }
