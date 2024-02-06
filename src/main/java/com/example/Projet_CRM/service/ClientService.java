@@ -1,8 +1,11 @@
 package com.example.Projet_CRM.service;
 
 import com.example.Projet_CRM.dao.ClientRepository;
+import com.example.Projet_CRM.dao.OrderRepository;
 import com.example.Projet_CRM.model.Client;
 
+import com.example.Projet_CRM.model.ClientState;
+import com.example.Projet_CRM.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,9 @@ import java.util.Optional;
 public class ClientService {
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
     public List<Client> getAll(){
         return clientRepository.findAll();
@@ -28,7 +34,16 @@ public class ClientService {
     }
 
     public void deleteClient(Client client){
-        clientRepository.delete(client);
+        List<Order> orderList = orderRepository.findAll();
+        for(Order order : orderList) {
+            if (order.getClient().getId() == client.getId()){
+                order.setClient(null);
+            }
+            orderRepository.save(order);
+        }
+        client.setClientState(ClientState.INACTIVE);
+
+        clientRepository.save(client);
     }
 
     // Mise à jour du client par remplacement avec les nouvelles données, sans test

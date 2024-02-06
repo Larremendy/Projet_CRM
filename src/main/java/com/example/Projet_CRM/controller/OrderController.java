@@ -63,8 +63,16 @@ public class OrderController {
 
     // PUT order/1
     @PutMapping("orders/{id}")
-    public void put(@PathVariable("id") Integer id, @RequestBody Order newOrder){
-        Optional<Order> oldOrder = orderService.getOne(id);
+    public ResponseEntity<String> put(@PathVariable("id") Integer id, @RequestBody Order newOrder){
+        Optional<Order> optional = orderService.getOne(id);
+
+        if(optional.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        Order orderToUpdate = optional.get();
+        orderService.update(orderToUpdate, newOrder);
+        return ResponseEntity.ok("Update réalisée");
+
 
     }
 }
