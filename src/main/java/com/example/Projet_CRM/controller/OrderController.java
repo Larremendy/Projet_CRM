@@ -1,6 +1,8 @@
 package com.example.Projet_CRM.controller;
 
+import com.example.Projet_CRM.model.Client;
 import com.example.Projet_CRM.model.Order;
+import com.example.Projet_CRM.service.ClientService;
 import com.example.Projet_CRM.service.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class OrderController {
     @Autowired
     OrderService orderService;
+    @Autowired
+    ClientService clientService;
 
     // GET orders
     @GetMapping("orders")
@@ -44,11 +48,18 @@ public class OrderController {
         if (order == null)
             return ResponseEntity.badRequest().body("Commande à saisir!");
 
-        if (order.getClient() == null)
-            // Ajouter des tests - order.getDesignation().isBlank() || order.getNbDays()==null...
-            return ResponseEntity.badRequest().body("Client à saisir!");
+        if (order.getClient().getId() == null)
+            // Ajouter des tests !!!
+            return ResponseEntity.badRequest().body("Identifiant du client à saisir!");
 
+        Optional<Client> optional = clientService.getOneById(order.getClient().getId());
+        if(optional.isEmpty())
+            return ResponseEntity.badRequest().body("Identifiant du client Inconnu!");
+
+        Client client = optional.get();
+        order.setClient(client);
         orderService.add(order);
+
         return ResponseEntity.ok(order);
     }
 
