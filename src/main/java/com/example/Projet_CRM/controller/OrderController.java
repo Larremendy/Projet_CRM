@@ -41,7 +41,6 @@ public class OrderController {
     }
 
     // POST order/1
-
     @PostMapping("orders")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity add(@RequestBody Order order) {

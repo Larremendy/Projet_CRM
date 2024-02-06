@@ -66,7 +66,8 @@ public class ClientController {
         return ResponseEntity.ok("Update réalisée");
     }
 
-
+// Patch Non demandé dans la consigne
+// Patch à finalliser et à tester
     @PatchMapping("clients/{id}")
     public ResponseEntity<?> patchtClient(@PathVariable("id") Integer id, @RequestBody Client newDataClient){
         Optional<Client> optional = clientService.getOneById(id);

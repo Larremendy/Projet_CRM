@@ -42,7 +42,6 @@ public class ClientService {
             orderRepository.save(order);
         }
         client.setClientState(ClientState.INACTIVE);
-
         clientRepository.save(client);
     }
 
@@ -61,7 +60,7 @@ public class ClientService {
 
             clientRepository.save(clientToUpdate);
     }
-
+    // A finalliser et à integrer dans le controller
     // Tests pour valider certaines données
     public String updateValideClient(Client clientToUpdate, Client newDataClient){
         String reponseStr = " ";
